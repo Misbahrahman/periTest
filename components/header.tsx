@@ -18,7 +18,11 @@ interface HeaderProps {
   onNewConversationClick?: () => void;
 }
 
-export default function Header({ selectedChat, onBack , onNewConversationClick  }: HeaderProps) {
+export default function Header({
+  selectedChat,
+  onBack,
+  onNewConversationClick,
+}: HeaderProps) {
   const { signOut, user } = useAuth();
   return (
     <div className="h-14 border-b border-gray-200 flex items-center justify-between px-4 bg-white fixed top-0 left-0 right-0 z-20">
@@ -48,8 +52,6 @@ export default function Header({ selectedChat, onBack , onNewConversationClick  
           <LuRefreshCcwDot className="h-4 w-4 mr-2" />
           Refresh
         </Button>
-
-        
 
         <Button
           variant="outline"
@@ -96,16 +98,15 @@ export default function Header({ selectedChat, onBack , onNewConversationClick  
           <HiOutlineListBullet className="h-5 w-5" />
         </Button>
 
-      <Button
-  variant="outline"
-  size="sm"
-  className="h-9 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-emerald-500 border-none hover:from-green-500 hover:to-emerald-600 transition-all duration-200 shadow-md hover:shadow-lg"
-  onClick={onNewConversationClick}
->
-  <MessageSquarePlusIcon className="h-4 w-4 mr-2" />
-  New Chat
-</Button>
-
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-9 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-emerald-500 border-none hover:from-green-500 hover:to-emerald-600 transition-all duration-200 shadow-md hover:shadow-lg"
+          onClick={onNewConversationClick}
+        >
+          <MessageSquarePlusIcon className="h-4 w-4 mr-2" />
+          New Chat
+        </Button>
 
         {user && (
           <Button
