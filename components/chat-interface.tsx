@@ -12,6 +12,7 @@ import ManageParticipantsModal from "./manage-participants-modal";
 import type { Chat, Message as MessageType, Profile } from "@/lib/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Spinner from "@/components/spinner";
+import NewConversationModal from "./new-conversation-modal";
 
 interface ParticipantWithProfile {
   user_id: string;
@@ -29,6 +30,7 @@ export default function ChatInterface() {
   const [allAvailableTags, setAllAvailableTags] = useState<string[]>([]);
   const [isManageParticipantsModalOpen, setIsManageParticipantsModalOpen] =
     useState(false);
+  const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
 
   const fetchUserChats = async () => {
     if (!user) return;
@@ -233,6 +235,14 @@ export default function ChatInterface() {
     }
   };
 
+  const handleNewConversationClick = () => {
+  setIsNewConversationModalOpen(true);
+};
+
+const handleConversationCreated = () => {
+  fetchUserChats(); // Refresh chat list
+};
+
   useEffect(() => {
     if (user && !authLoading) {
       fetchUserChats();
@@ -377,7 +387,10 @@ export default function ChatInterface() {
   return (
     <div className="flex flex-col h-full w-full overflow-hidden relative">
       <div className="fixed top-0 bottom-0 left-16 w-px bg-gray-200 z-10"></div>
-      <Header selectedChat={selectedChat} />
+      <Header 
+  selectedChat={selectedChat} 
+  onNewConversationClick={handleNewConversationClick}
+/>
       <div className="flex flex-1 pt-14 overflow-hidden pr-16">
         <Sidebar
           chats={filteredChats}
@@ -419,6 +432,12 @@ export default function ChatInterface() {
           currentUserId={user?.id}
         />
       )}
+      <NewConversationModal
+  isOpen={isNewConversationModalOpen}
+  onOpenChange={setIsNewConversationModalOpen}
+  currentUserId={user?.id}
+  onConversationCreated={handleConversationCreated}
+/>
     </div>
   );
 }

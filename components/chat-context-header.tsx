@@ -84,7 +84,7 @@ export default function ChatContextHeader({
           size="icon"
           className="h-8 w-8 text-gray-600 hover:bg-gray-100 hover:text-green-500 manage-participants-btn"
           onClick={onManageParticipantsClick}
-          title="Manage Participants Test"
+          title="Participants"
         >
           <TbMessageCirclePlus className="h-5 w-5" />
         </Button>
