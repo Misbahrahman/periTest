@@ -159,67 +159,66 @@ export default function Sidebar({
 
         {/* Chat list sidebar */}
         <div className="w-[364px] flex flex-col h-full overflow-hidden border-r border-gray-200">
-          <div className="p-4">
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-2">
-                <Button
-                  size="sm"
-                  className={`text-xs px-3 py-1 h-8 rounded-md flex items-center font-semibold border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 ${
-                    isCustomFilterOpen
-                      ? "bg-green-600 text-white hover:bg-green-700"
-                      : "text-green-600 bg-transparent hover:bg-green-100"
-                  }`}
-                  onClick={() => setIsCustomFilterOpen(!isCustomFilterOpen)}
-                >
-                  <RiFolderDownloadFill className="h-4 w-4 mr-2" />
-                  Custom filter
-                </Button>
+          {/* Filter Controls - Better Aligned */}
+          {/* Filter Controls - Better Aligned */}
+          <div className="p-3 border-b border-gray-100">
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Custom filter and Save */}
+              <Button
+                size="sm"
+                className={`text-xs px-2.5 py-1.5 h-8 rounded flex items-center font-medium border transition-all duration-200 ${
+                  isCustomFilterOpen
+                    ? "bg-green-600 text-white hover:bg-green-700 border-green-600"
+                    : "text-green-600 bg-white hover:bg-green-50 border-green-200"
+                }`}
+                onClick={() => setIsCustomFilterOpen(!isCustomFilterOpen)}
+              >
+                <RiFolderDownloadFill className="h-3.5 w-3.5 mr-1" />
+                Custom
+              </Button>
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="text-xs px-3 py-1 h-8 text-gray-600"
-                >
-                  Save
-                </Button>
-              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-xs px-2.5 py-1.5 h-8 text-gray-600 border-gray-200 hover:bg-gray-50"
+              >
+                Save
+              </Button>
 
+              {/* Search */}
               <div className="relative">
-                <FaSearch className="h-3 w-3 absolute left-2 top-2.5 text-gray-400" />
+                <FaSearch className="h-3.5 w-3.5 absolute left-2 top-2.5 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-8 pr-2 py-1 h-8 text-sm border border-gray-300 rounded-md w-24 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500"
+                  className="pl-7 pr-2 py-1.5 h-8 text-xs border border-gray-200 rounded w-28 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 transition"
                   value={searchQuery}
                   onChange={(e) => onSearch(e.target.value)}
                 />
               </div>
 
+              {/* Filter */}
               <Button
                 variant="outline"
                 size="sm"
-                className="text-xs px-3 py-1 h-8 text-gray-600"
+                className="text-xs px-2 py-1.5 h-8 text-gray-600 border-gray-200 hover:bg-gray-50 flex items-center gap-1"
               >
-                <IoFilter className="h-3 w-3 mr-2 text-current" />
-                Filtered
-                <Badge className="ml-1 bg-green-600 h-5 w-5 p-0 flex items-center justify-center">
-                  3
-                </Badge>
+                <IoFilter className="h-3.5 w-3.5" />3
               </Button>
             </div>
           </div>
 
           {/* Tags Filter Area */}
           {allAvailableTags.length > 0 && (
-            <div className="px-4 pt-2 pb-2 border-b border-gray-200">
-              <div className="flex flex-wrap gap-2">
+            <div className="px-3 py-2.5 border-b border-gray-100">
+              <div className="flex flex-wrap gap-1.5">
                 <Button
                   size="sm"
                   variant={!activeTagFilter ? "secondary" : "outline"}
-                  className={`text-xs px-3 py-1 h-auto rounded-full ${
+                  className={`text-xs px-2.5 py-1 h-6 rounded-full font-medium transition-all duration-200 ${
                     !activeTagFilter
-                      ? "bg-green-600 text-white hover:bg-green-700"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-green-600 text-white hover:bg-green-700 border-green-600"
+                      : "text-gray-600 hover:bg-gray-50 border-gray-200"
                   }`}
                   onClick={() => onTagFilterChange(null)}
                 >
@@ -230,10 +229,10 @@ export default function Sidebar({
                     key={tag}
                     size="sm"
                     variant={activeTagFilter === tag ? "secondary" : "outline"}
-                    className={`text-xs px-3 py-1 h-auto rounded-full ${
+                    className={`text-xs px-2.5 py-1 h-6 rounded-full font-medium transition-all duration-200 ${
                       activeTagFilter === tag
-                        ? "bg-green-600 text-white hover:bg-green-700"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-green-600 text-white hover:bg-green-700 border-green-600"
+                        : "text-gray-600 hover:bg-gray-50 border-gray-200"
                     }`}
                     onClick={() => onTagFilterChange(tag)}
                   >
@@ -244,6 +243,7 @@ export default function Sidebar({
             </div>
           )}
 
+          {/* Chat List */}
           <div className="flex-1 overflow-y-auto">
             {chats.map((chat) => (
               <ChatListItem
